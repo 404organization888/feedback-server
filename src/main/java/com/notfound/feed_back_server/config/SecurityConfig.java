@@ -36,7 +36,6 @@ public class SecurityConfig {
                         -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-                .requestMatchers(HttpMethod.OPTIONS).permitAll()
                 .requestMatchers(HttpMethod.POST, "/messages/create").permitAll()
                 .requestMatchers(HttpMethod.POST, "/404admin/login").permitAll()
                 .anyRequest().authenticated()

@@ -20,16 +20,6 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/register")
-    public ResponseEntity<String> register(@Valid @RequestBody UserRequestDTO request) {
-        try {
-            userService.register(request.getUsername(), request.getPassword());
-            return ResponseEntity.status(HttpStatus.CREATED).body("Registration successful");
-
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to register");
-        }
-    }
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@Valid @RequestBody UserRequestDTO request) {

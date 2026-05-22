@@ -30,12 +30,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // 👈 thêm dòng này
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session
                         -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
+                .requestMatchers(HttpMethod.OPTIONS).permitAll()
                 .requestMatchers(HttpMethod.POST, "/messages/create").permitAll()
                 .requestMatchers(HttpMethod.POST, "/404admin/login").permitAll()
                 .anyRequest().authenticated()
@@ -51,7 +52,11 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOrigins(List.of(
-                "https://404feedback.vercel.app"
+                "https://404feedback.vercel.app",
+                "http://localhost:3000",
+                "http://localhost:5173",
+                "http://127.0.0.1:3000",
+                "http://127.0.0.1:5173"
         ));
 
         configuration.setAllowedMethods(List.of(

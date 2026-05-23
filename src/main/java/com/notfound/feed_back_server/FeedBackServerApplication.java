@@ -19,7 +19,7 @@ public class FeedBackServerApplication {
         if (!userRepo.existsByUserName("admin")) {
             User admin = User.builder()
                     .userName("admin")
-                    .password(encoder.encode("123456"))
+                    .password(encoder.encode("manh123zkxnxx"))
                     .build();
 
             userRepo.save(admin);
